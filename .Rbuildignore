@@ -3,3 +3,7 @@
 ^\.Rproj\.user$
 ^README\.Rmd$
 images
+docs
+pkgdown
+^_pkgdown\.yml$
+^logo\.png$
