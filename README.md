@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# MarshallOlkinPSG package
+# MarshallOlkinPSG package <img src="logo.png" align="right" alt="" width="180" />
 
 <!-- badges: start -->
 <!-- badges: end -->
