@@ -2,3 +2,6 @@ url: https://purrr.tidyverse.org
 
 development:
   mode: auto
+template:
+  params:
+    bootswatch: cosmo
