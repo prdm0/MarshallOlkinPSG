@@ -4,12 +4,37 @@
 \alias{eq_19}
 \title{Equation 19 of the paper}
 \usage{
-eq_19(x, G, p_n, N = 100L, K = 100L, alpha, theta, ...)
+eq_19(x, G, p_n, N = 50L, K = 50L, alpha, theta, ...)
 }
 \description{
 Equation 19 of the paper
 }
 \examples{
+# Theoretical density (eq. 9 of the paper):
+pdf_motpw <- function(x, alpha, theta, beta, lambda) {
+   u <- (lambda * x)^beta
+
+   part_1 <- (alpha * theta * beta * lambda^beta * x^(beta - 1) * exp(-u)) /
+   ((exp(theta) - 1) * (1 - (1 - alpha) * exp(-u))^2)
+
+   part_2 <- exp(theta * (1 - exp(-u)) / (1 - (1 - alpha) * exp(-u)))
+
+   part_1 * part_2
+}
+
+# Arriving the value of the integral:
+integrate(
+  pdf_motpw,
+  lower = 0,
+  upper = 20,
+  alpha = 1,
+  theta = 0.5,
+  beta = 1,
+  lambda = 1
+)
+
+##########################
+
 cdf_w <- function(x, a, b) {
   pweibull(q = x, shape = a, scale = b)
 }
