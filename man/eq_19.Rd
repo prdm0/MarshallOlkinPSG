@@ -39,19 +39,19 @@ cdf_w <- function(x, a, b) {
   pweibull(q = x, shape = a, scale = b)
 }
 
-eq_19(
-  x = 1,
-  G = cdf_w,
-  p_n = pf_ztp,
-  N = 100L,
-  K = 100L,
-  alpha = 1.2,
-  theta = 1.3,
-  a = 1,
-  b = 1
-)
+f <- function(x) {
+   eq_19(
+      x = x,
+      G = cdf_w,
+      p_n = pf_ztp,
+      N = 200L,
+      K = 100L,
+      alpha = 1.2,
+      theta = 0.3,
+      a = 1,
+      b = 1
+    )
+}
 
-integrate(f = eq_19, lower = 0, upper = 10,
-          G = cdf_w, p_n = pf_ztp, N = 100L, K = 100L,
-          alpha = 1.2, theta = 1.3, a = 1, b = 1)
+integrate(f = f, lower = 0, upper = 4)
 }

@@ -125,16 +125,56 @@
     <p>Equation 19 of the paper</p>
     </div>
 
-    <pre class="usage"><span class='fu'>eq_19</span><span class='op'>(</span><span class='va'>G</span>, <span class='va'>p_n</span>, N <span class='op'>=</span> <span class='fl'>100L</span>, K <span class='op'>=</span> <span class='fl'>100L</span>, <span class='va'>alpha</span>, <span class='va'>theta</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>eq_19</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>G</span>, <span class='va'>p_n</span>, N <span class='op'>=</span> <span class='fl'>50L</span>, K <span class='op'>=</span> <span class='fl'>50L</span>, <span class='va'>alpha</span>, <span class='va'>theta</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>pdf_w</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span> <span class='op'>{</span>
-   <span class='fu'><a href='https://rdrr.io/r/stats/Weibull.html'>pweibull</a></span><span class='op'>(</span>q <span class='op'>=</span> <span class='va'>x</span>, shape <span class='op'>=</span> <span class='va'>a</span>, scale <span class='op'>=</span> <span class='va'>b</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'># Theoretical density (eq. 9 of the paper):</span>
+<span class='va'>pdf_motpw</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>alpha</span>, <span class='va'>theta</span>, <span class='va'>beta</span>, <span class='va'>lambda</span><span class='op'>)</span> <span class='op'>{</span>
+   <span class='va'>u</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>lambda</span> <span class='op'>*</span> <span class='va'>x</span><span class='op'>)</span><span class='op'>^</span><span class='va'>beta</span>
+
+   <span class='va'>part_1</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>alpha</span> <span class='op'>*</span> <span class='va'>theta</span> <span class='op'>*</span> <span class='va'>beta</span> <span class='op'>*</span> <span class='va'>lambda</span><span class='op'>^</span><span class='va'>beta</span> <span class='op'>*</span> <span class='va'>x</span><span class='op'>^</span><span class='op'>(</span><span class='va'>beta</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>/</span>
+   <span class='op'>(</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='va'>theta</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>*</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='va'>alpha</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span>
+
+   <span class='va'>part_2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='va'>theta</span> <span class='op'>*</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>/</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='va'>alpha</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+
+   <span class='va'>part_1</span> <span class='op'>*</span> <span class='va'>part_2</span>
 <span class='op'>}</span>
-<span class='fu'>eq_19</span><span class='op'>(</span><span class='va'>alpha</span>, <span class='va'>theta</span>, <span class='va'>p_n</span>, <span class='va'>G</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in vapply(X = 1L:N, FUN = inner_sum, FUN.VALUE = double(length = 1L)): objeto 'p_n' não encontrado</span></div></pre>
+
+<span class='co'># Arriving the value of the integral:</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/integrate.html'>integrate</a></span><span class='op'>(</span>
+  <span class='va'>pdf_motpw</span>,
+  lower <span class='op'>=</span> <span class='fl'>0</span>,
+  upper <span class='op'>=</span> <span class='fl'>20</span>,
+  alpha <span class='op'>=</span> <span class='fl'>1</span>,
+  theta <span class='op'>=</span> <span class='fl'>0.5</span>,
+  beta <span class='op'>=</span> <span class='fl'>1</span>,
+  lambda <span class='op'>=</span> <span class='fl'>1</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; 1 with absolute error &lt; 1.7e-07</div><div class='input'>
+<span class='co'>##########################</span>
+
+<span class='va'>cdf_w</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/Weibull.html'>pweibull</a></span><span class='op'>(</span>q <span class='op'>=</span> <span class='va'>x</span>, shape <span class='op'>=</span> <span class='va'>a</span>, scale <span class='op'>=</span> <span class='va'>b</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+<span class='va'>f</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
+   <span class='fu'>eq_19</span><span class='op'>(</span>
+      x <span class='op'>=</span> <span class='va'>x</span>,
+      G <span class='op'>=</span> <span class='va'>cdf_w</span>,
+      p_n <span class='op'>=</span> <span class='va'>pf_ztp</span>,
+      N <span class='op'>=</span> <span class='fl'>200L</span>,
+      K <span class='op'>=</span> <span class='fl'>100L</span>,
+      alpha <span class='op'>=</span> <span class='fl'>1.2</span>,
+      theta <span class='op'>=</span> <span class='fl'>0.3</span>,
+      a <span class='op'>=</span> <span class='fl'>1</span>,
+      b <span class='op'>=</span> <span class='fl'>1</span>
+    <span class='op'>)</span>
+<span class='op'>}</span>
+
+<span class='fu'><a href='https://rdrr.io/r/stats/integrate.html'>integrate</a></span><span class='op'>(</span>f <span class='op'>=</span> <span class='va'>f</span>, lower <span class='op'>=</span> <span class='fl'>0</span>, upper <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in integrate(f = f, lower = 0, upper = 4): evaluation of function gave a result of wrong length</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
