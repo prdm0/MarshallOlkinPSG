@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • MarshallOlkinPSG</title>
+<title>Generates the density distribution or the accumulated distribution function Exp-G — exp_G • MarshallOlkinPSG</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Generates the density distribution or the accumulated distribution function Exp-G — exp_G" />
+<meta property="og:description" content="Generates the density distribution or the accumulated distribution function Exp-G" />
 <meta property="og:image" content="https://purrr.tidyverse.org/logo.png" />
 
 
@@ -66,7 +67,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -113,72 +114,70 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Generates the density distribution or the accumulated distribution function Exp-G</h1>
+    <small class="dont-index">Source: <a href='https://github.com/prdm0/MarshallOlkinPSG/blob/master/R/exp-G.R'><code>R/exp-G.R</code></a></small>
+    <div class="hidden name"><code>exp_G.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Generates the density distribution or the accumulated distribution function Exp-G</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>exp_G</span><span class='op'>(</span><span class='va'>G</span>, density <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="eq_19.html">eq_19()</a></code> </p>
-        </td>
-        <td><p>Equation 19 of the paper</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="exp_G.html">exp_G()</a></code> </p>
-        </td>
-        <td><p>Generates the density distribution or the accumulated distribution function Exp-G</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pf_geometric.html">pf_geometric()</a></code> </p>
-        </td>
-        <td><p>Geometric probability function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pf_logarithmic.html">pf_logarithmic()</a></code> </p>
-        </td>
-        <td><p>Logarithmic probability function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pf_ztp.html">pf_ztp()</a></code> </p>
-        </td>
-        <td><p>Zero-truncated Poisson probability function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="upsilon.html">upsilon()</a></code> </p>
-        </td>
-        <td><p>Mathematical term used in the sum of equation 19 of the paper</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>G</th>
+      <td><p>Cumulative distribution function (baseline)</p></td>
+    </tr>
+    <tr>
+      <th>density</th>
+      <td><p>By default, <code>density = FALSE</code>, that is, it returns the cumulative
+distribution function \(Exp-G\). If <code>density = TRUE</code>, then the \(Exp-G\) density
+function will be reinforced.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The probability density function or the cumulative distribution
+function will be returned.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function generates the probability density function or the
+accumulated distribution function \(Exp-G\), for any specified \(G\).
+Exp-G will have one more parameter, being it \(s &gt; 0\).</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='va'>pdf_w</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>alpha</span>, <span class='va'>beta</span><span class='op'>)</span> <span class='op'>{</span>
+   <span class='fu'><a href='https://rdrr.io/r/stats/Weibull.html'>pweibull</a></span><span class='op'>(</span>q <span class='op'>=</span> <span class='va'>x</span>, shape <span class='op'>=</span> <span class='va'>alpha</span>, scale <span class='op'>=</span> <span class='va'>beta</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+<span class='co'># Exp-Weibull density:</span>
+<span class='va'>pdf_exp_w</span> <span class='op'>&lt;-</span> <span class='fu'>exp_G</span><span class='op'>(</span>G <span class='op'>=</span> <span class='va'>pdf_w</span>, density <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='co'># Testing if exp_w is density:</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/integrate.html'>integrate</a></span><span class='op'>(</span>
+   f <span class='op'>=</span> <span class='va'>pdf_exp_w</span>,
+   lower <span class='op'>=</span> <span class='fl'>0</span>,
+   upper <span class='op'>=</span> <span class='cn'>Inf</span>,
+   alpha <span class='op'>=</span> <span class='fl'>1.2</span>,
+   beta <span class='op'>=</span> <span class='fl'>1.3</span>,
+   s <span class='op'>=</span> <span class='fl'>2.1</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; 1 with absolute error &lt; 4.7e-06</div><div class='input'>
+<span class='co'># Exp-Weibull (accumulated distribution):</span>
+<span class='va'>cdf_exp_w</span> <span class='op'>&lt;-</span> <span class='fu'>exp_G</span><span class='op'>(</span>G <span class='op'>=</span> <span class='va'>pdf_w</span>, density <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='co'># Testing whether it is cumulative distribution:</span>
+<span class='fu'>cdf_exp_w</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>0</span>, alpha <span class='op'>=</span> <span class='fl'>1.2</span>, beta <span class='op'>=</span> <span class='fl'>1.3</span>, s <span class='op'>=</span> <span class='fl'>2.1</span><span class='op'>)</span> <span class='co'># in 0</span>
+</div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='fu'>cdf_exp_w</span><span class='op'>(</span>x <span class='op'>=</span> <span class='cn'>Inf</span>, alpha <span class='op'>=</span> <span class='fl'>1.2</span>, beta <span class='op'>=</span> <span class='fl'>1.3</span>, s <span class='op'>=</span> <span class='fl'>2.1</span><span class='op'>)</span> <span class='co'># in Inf</span>
+</div><div class='output co'>#&gt; [1] 1</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

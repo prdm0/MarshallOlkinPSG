@@ -12,7 +12,7 @@
 #' accumulated distribution function \eqn{Exp-G}, for any specified \eqn{G}.
 #' Exp-G will have one more parameter, being it \eqn{s > 0}.
 #' @examples
-#' pdf_w <- function(x, alpha, beta) {
+#' cdf_w <- function(x, alpha, beta) {
 #'    pweibull(q = x, shape = alpha, scale = beta)
 #' }
 #'
@@ -63,8 +63,17 @@ upsilon <- function(n, k, alpha, theta, p_n) {
   (-1)^k * choose(-n, k) * alpha^(-n) * (1 - alpha^(-1))^k * p_n(n = n, theta = theta)
 }
 
+#' Equation 19 of the paper
+#'
+#' @examples
+#' cdf_w <- function(x, a, b) {
+#'    pweibull(q = x, shape = a, scale = b)
+#' }
+#' eq_19(alpha, theta, p_n, G)
 #' @export
-eq_19 <- function(N = 100L, K = 100L, alpha, theta, p_n) {
+eq_19 <- function(x, G, p_n, N = 100L, K = 100L, alpha, theta, ...) {
+
+  pi <- exp_G(G = G, density = TRUE)
 
   inner_sum <- function(n) {
     step_1 <- function(k) {
@@ -74,7 +83,7 @@ eq_19 <- function(N = 100L, K = 100L, alpha, theta, p_n) {
         alpha = alpha,
         theta = theta,
         p_n = p_n
-      )
+      ) * pi(s = n + k, ...)
     }
     vapply(
       X = 0L:K,
@@ -83,14 +92,10 @@ eq_19 <- function(N = 100L, K = 100L, alpha, theta, p_n) {
     ) %>% sum()
   }
 
-  upsilon <-
-    vapply(
+  vapply(
     X = 1L:N,
     FUN = inner_sum,
     FUN.VALUE = double(length = 1L)
   ) %>% sum()
-
-
-
 }
 

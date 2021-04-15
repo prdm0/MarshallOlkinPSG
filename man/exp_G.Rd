@@ -26,7 +26,7 @@ accumulated distribution function \eqn{Exp-G}, for any specified \eqn{G}.
 Exp-G will have one more parameter, being it \eqn{s > 0}.
 }
 \examples{
-pdf_w <- function(x, alpha, beta) {
+cdf_w <- function(x, alpha, beta) {
    pweibull(q = x, shape = alpha, scale = beta)
 }
 
