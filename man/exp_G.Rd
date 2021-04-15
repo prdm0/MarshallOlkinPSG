@@ -31,7 +31,7 @@ cdf_w <- function(x, alpha, beta) {
 }
 
 # Exp-Weibull density:
-pdf_exp_w <- exp_G(G = pdf_w, density = TRUE)
+pdf_exp_w <- exp_G(G = cdf_w, density = TRUE)
 
 # Testing if exp_w is density:
 integrate(

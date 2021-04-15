@@ -17,7 +17,7 @@
 #' }
 #'
 #' # Exp-Weibull density:
-#' pdf_exp_w <- exp_G(G = pdf_w, density = TRUE)
+#' pdf_exp_w <- exp_G(G = cdf_w, density = TRUE)
 #'
 #' # Testing if exp_w is density:
 #' integrate(
@@ -67,9 +67,24 @@ upsilon <- function(n, k, alpha, theta, p_n) {
 #'
 #' @examples
 #' cdf_w <- function(x, a, b) {
-#'    pweibull(q = x, shape = a, scale = b)
+#'   pweibull(q = x, shape = a, scale = b)
 #' }
-#' eq_19(alpha, theta, p_n, G)
+#'
+#' eq_19(
+#'   x = 1,
+#'   G = cdf_w,
+#'   p_n = pf_ztp,
+#'   N = 100L,
+#'   K = 100L,
+#'   alpha = 1.2,
+#'   theta = 1.3,
+#'   a = 1,
+#'   b = 1
+#' )
+#'
+#' integrate(f = eq_19, lower = 0, upper = 10,
+#'           G = cdf_w, p_n = pf_ztp, N = 100L, K = 100L,
+#'           alpha = 1.2, theta = 1.3, a = 1, b = 1)
 #' @export
 eq_19 <- function(x, G, p_n, N = 100L, K = 100L, alpha, theta, ...) {
 
@@ -83,7 +98,7 @@ eq_19 <- function(x, G, p_n, N = 100L, K = 100L, alpha, theta, ...) {
         alpha = alpha,
         theta = theta,
         p_n = p_n
-      ) * pi(s = n + k, ...)
+      ) * pi(x = x, s = n + k, ...)
     }
     vapply(
       X = 0L:K,
