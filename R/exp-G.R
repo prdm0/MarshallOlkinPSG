@@ -91,8 +91,8 @@ upsilon <- function(n, k, alpha, theta, p_n) {
 #'
 #' ##########################
 #'
-#' cdf_w <- function(x, a, b) {
-#'   pweibull(q = x, shape = a, scale = b)
+#' cdf_w <- function(x, beta, lambda) {
+#'   pweibull(q = x, shape = beta, scale = lambda)
 #' }
 #'
 #' f <- function(x) {
@@ -104,12 +104,12 @@ upsilon <- function(n, k, alpha, theta, p_n) {
 #'       K = 100L,
 #'       alpha = 1.2,
 #'       theta = 0.3,
-#'       a = 1,
-#'       b = 1
+#'       beta = 1,
+#'       lambda = 1
 #'     )
 #' }
 #'
-#' integrate(f = f, lower = 0, upper = 4)
+#' f(x = 0.5)
 #' @export
 eq_19 <- function(x, G, p_n, N = 50L, K = 50L, alpha, theta, ...) {
 
@@ -125,15 +125,20 @@ eq_19 <- function(x, G, p_n, N = 50L, K = 50L, alpha, theta, ...) {
         p_n = p_n
       ) * pi(x = x, s = n + k, ...)
     }
-    sapply(
+    vapply(
       X = 0L:K,
-      FUN = step_1
-    ) %>% sum()
+      FUN = step_1,
+      FUN.VALUE = double(length = 1L)
+      ) %>% sum()
   }
 
-  sapply(
-    X = 1L:N,
-    FUN = inner_sum
-  ) %>% sum()
-}
+  future::plan("multisession", workers = parallel::detectCores() - 1L)
+  furrr::future_map_dbl(.x = 1L:N, .f = inner_sum) %>%
+    sum()
 
+  # vapply(
+  #   X = 1L:N,
+  #   FUN = inner_sum,
+  #   FUN.VALUE = double(length = 1L)
+  # ) %>% sum()
+}

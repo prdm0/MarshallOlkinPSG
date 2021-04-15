@@ -15,7 +15,10 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
     actuar,
+    furrr,
+    ggplot2,
     magrittr,
-    numDeriv
+    numDeriv,
+    parallel
 URL: https://github.com/prdm0/MarshallOlkinPSG
 BugReports: https://github.com/prdm0/MarshallOlkinPSG/issues

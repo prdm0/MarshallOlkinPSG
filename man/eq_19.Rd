@@ -35,8 +35,8 @@ integrate(
 
 ##########################
 
-cdf_w <- function(x, a, b) {
-  pweibull(q = x, shape = a, scale = b)
+cdf_w <- function(x, beta, lambda) {
+  pweibull(q = x, shape = beta, scale = lambda)
 }
 
 f <- function(x) {
@@ -48,10 +48,10 @@ f <- function(x) {
       K = 100L,
       alpha = 1.2,
       theta = 0.3,
-      a = 1,
-      b = 1
+      beta = 1,
+      lambda = 1
     )
 }
 
-integrate(f = f, lower = 0, upper = 4)
+f(x = 0.5)
 }

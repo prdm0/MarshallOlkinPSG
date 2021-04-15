@@ -2,6 +2,7 @@
 
 export("%>%")
 export(eq_19)
+export(eval_plot_moptw)
 export(exp_G)
 export(pf_geometric)
 export(pf_logarithmic)
