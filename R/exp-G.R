@@ -11,8 +11,8 @@
 #' accumulated distribution function \eqn{Exp-G}, for any specified \eqn{G}.
 #' Exp-G will have one more parameter, being it \eqn{s > 0}.
 #' @examples
-#' cdf_w <- function(x, alpha, beta) {
-#'    pweibull(q = x, shape = alpha, scale = beta)
+#' cdf_w <- function(x, beta, lambda) {
+#'   1 - exp(-(lambda * x)^beta)
 #' }
 #'
 #' # Exp-Weibull density:
@@ -46,7 +46,6 @@ exp_G <- function(G, density = FALSE) {
     }
   }
 }
-
 
 #' Mathematical term used in the sum of equation 19 of the paper
 #'

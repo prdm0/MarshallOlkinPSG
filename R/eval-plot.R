@@ -1,5 +1,5 @@
 #' Plot Eval MOPTW
-#' @importFrom ggplot2 ggplot geom_line
+#' @importFrom ggplot2 ggplot geom_line aes
 #' @param n_points Number of points to form the plot;
 #' @param N Maximum number of sums of the external sum of Eq. 19 of the paper.
 #' @param K Maximum number of sums of the interior sum of Eq. 19 of the paper.
@@ -33,7 +33,7 @@ eval_plot_moptw <- function(n_points = 5L, N = 200L, K = 100L, xmin, xmax, alpha
   seq_x <- seq(xmin, xmax, length.out = n_points)
 
   cdf_w <- function(x, beta, lambda) {
-    pweibull(q = x, shape = beta, scale = lambda)
+    1 - exp(-(lambda * x)^beta)
   }
 
   # Theoretical density (eq. 9 of the paper):
@@ -47,14 +47,6 @@ eval_plot_moptw <- function(n_points = 5L, N = 200L, K = 100L, xmin, xmax, alpha
 
     part_1 * part_2
   }
-  y_theorical <-
-    pdf_motpw(
-       x = seq_x,
-       alpha = alpha,
-       theta = theta,
-       lambda = lambda,
-       beta = beta
-    )
 
   y_aprox_step <- function(x) {
     eq_19(
@@ -71,12 +63,24 @@ eval_plot_moptw <- function(n_points = 5L, N = 200L, K = 100L, xmin, xmax, alpha
     )
   }
 
+  y_theorical <-
+    pdf_motpw(
+      x = seq_x,
+      alpha = alpha,
+      theta = theta,
+      lambda = lambda,
+      beta = beta
+    )
+
   y_aprox <- vapply(X = seq_x, FUN = y_aprox_step, FUN.VALUE = double(length = 1L))
 
   df <- data.frame(x = rep(seq_x, 2L), y = c(y_theorical, y_aprox),
-        group = c(rep("theorical", length(y_theorical)), rep("aprox", length(y_aprox))))
+        name = c(rep("theorical", length(y_aprox)), rep("aprox", length(y_theorical))))
 
-  ggplot2::ggplot(df, ggplot2::aes(x, y, group = group)) +
-     ggplot2::geom_line()
+  df %>%
+     ggplot(aes(x = x, y = y, color = name)) +
+     geom_line()
+
+  df
 
 }
