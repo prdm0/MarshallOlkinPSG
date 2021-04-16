@@ -16,6 +16,7 @@ RoxygenNote: 7.1.1
 Imports: 
     actuar,
     furrr,
+    future,
     ggplot2,
     magrittr,
     numDeriv,

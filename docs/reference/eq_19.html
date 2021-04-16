@@ -125,36 +125,54 @@
     <p>Equation 19 of the paper</p>
     </div>
 
-    <pre class="usage"><span class='fu'>eq_19</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>G</span>, <span class='va'>p_n</span>, N <span class='op'>=</span> <span class='fl'>50L</span>, K <span class='op'>=</span> <span class='fl'>50L</span>, <span class='va'>alpha</span>, <span class='va'>theta</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>eq_19</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>G</span>, <span class='va'>p_n</span>, N <span class='op'>=</span> <span class='fl'>50L</span>, K <span class='op'>=</span> <span class='fl'>50L</span>, <span class='va'>alpha</span>, <span class='va'>theta</span>, parallel <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Support of the probability density function.</p></td>
+    </tr>
+    <tr>
+      <th>G</th>
+      <td><p>Baseline cumulative distribution function.</p></td>
+    </tr>
+    <tr>
+      <th>p_n</th>
+      <td><p>Zero-truncated power series distribution.</p></td>
+    </tr>
+    <tr>
+      <th>N</th>
+      <td><p>Maximum number of sums of the external sum of Eq. 19 of the paper.</p></td>
+    </tr>
+    <tr>
+      <th>K</th>
+      <td><p>Maximum number of sums of the interior sum of Eq. 19 of the paper.</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>Parameter added by the proposed family.</p></td>
+    </tr>
+    <tr>
+      <th>theta</th>
+      <td><p>Parameter added by the proposed family.</p></td>
+    </tr>
+    <tr>
+      <th>parallel</th>
+      <td><p>If <code>parallel = TRUE</code>, the code will be executed in parallel,
+taking advantage of the predecessor's multicolors, if any. If <code>parallel = FALSE</code>,
+the code will be executed serially.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Baseline distribution parameters.</p></td>
+    </tr>
+    </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># Theoretical density (eq. 9 of the paper):</span>
-<span class='va'>pdf_theorical</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>alpha</span>, <span class='va'>theta</span>, <span class='va'>beta</span>, <span class='va'>lambda</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>u</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>lambda</span> <span class='op'>*</span> <span class='va'>x</span><span class='op'>)</span><span class='op'>^</span><span class='va'>beta</span>
-
-  <span class='va'>part_1</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>alpha</span> <span class='op'>*</span> <span class='va'>theta</span> <span class='op'>*</span> <span class='va'>beta</span> <span class='op'>*</span> <span class='va'>lambda</span><span class='op'>^</span><span class='va'>beta</span> <span class='op'>*</span> <span class='va'>x</span><span class='op'>^</span><span class='op'>(</span><span class='va'>beta</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>/</span>
-    <span class='op'>(</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='va'>theta</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>*</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='va'>alpha</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span>
-
-  <span class='va'>part_2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='va'>theta</span> <span class='op'>*</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>/</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='va'>alpha</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-
-  <span class='va'>part_1</span> <span class='op'>*</span> <span class='va'>part_2</span>
-<span class='op'>}</span>
-
-<span class='co'># Checking the implementation of the pdf_theorical function</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/integrate.html'>integrate</a></span><span class='op'>(</span>
-  <span class='va'>pdf_theorical</span>,
-  lower <span class='op'>=</span> <span class='fl'>0</span>,
-  upper <span class='op'>=</span> <span class='fl'>20</span>,
-  alpha <span class='op'>=</span> <span class='fl'>1</span>,
-  theta <span class='op'>=</span> <span class='fl'>0.5</span>,
-  beta <span class='op'>=</span> <span class='fl'>1</span>,
-  lambda <span class='op'>=</span> <span class='fl'>1</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; 1 with absolute error &lt; 1.7e-07</div><div class='input'>
-<span class='co'># Implementing the Weibull distribution function (baseline). This function is</span>
+    <pre class="examples"><div class='input'><span class='co'># Implementing the Weibull distribution function (baseline). This function is</span>
 <span class='co'># used in the eq_19 function. Another baseline G can be passed and tested in</span>
 <span class='co'># eq_19.</span>
 <span class='va'>cdf_w</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>beta</span>, <span class='va'>lambda</span><span class='op'>)</span> <span class='op'>{</span>
@@ -175,18 +193,29 @@
   <span class='op'>)</span>
 <span class='op'>}</span>
 
-<span class='co'># True parameters:</span>
-<span class='va'>x</span> <span class='op'>=</span> <span class='fl'>0.28</span>
-<span class='va'>alpha</span> <span class='op'>=</span> <span class='fl'>1</span>
-<span class='va'>theta</span> <span class='op'>=</span> <span class='fl'>1</span>
-<span class='va'>beta</span> <span class='op'>=</span> <span class='fl'>1</span>
-<span class='va'>lambda</span> <span class='op'>=</span> <span class='fl'>1</span>
+<span class='co'># True parameters</span>
+<span class='va'>x</span> <span class='op'>=</span> <span class='fl'>1.28</span>
+<span class='va'>alpha</span> <span class='op'>=</span> <span class='fl'>1.2</span>
+<span class='va'>theta</span> <span class='op'>=</span> <span class='fl'>1.5</span>
+<span class='va'>beta</span> <span class='op'>=</span> <span class='fl'>1.33</span>
+<span class='va'>lambda</span> <span class='op'>=</span> <span class='fl'>2</span>
 
-<span class='co'># Checking theoretical density and approximate density, for a finite sum of</span>
-<span class='co'># Eq. 19 of the paper:</span>
-<span class='fu'>pdf_aprox</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, alpha <span class='op'>=</span> <span class='va'>alpha</span>, theta <span class='op'>=</span> <span class='va'>theta</span>, lambda <span class='op'>=</span> <span class='va'>lambda</span>, beta <span class='op'>=</span> <span class='va'>beta</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0.5615196</div><div class='input'><span class='fu'>pdf_theorical</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='va'>alpha</span>, theta <span class='op'>=</span> <span class='va'>theta</span>, beta <span class='op'>=</span> <span class='va'>beta</span>, lambda <span class='op'>=</span> <span class='va'>lambda</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0.5615196</div></pre>
+<span class='co'># Checking theorical density and approximate density for a finite sum of Eq 19 of the paper</span>
+<span class='fu'>pdf_aprox</span><span class='op'>(</span>
+   x <span class='op'>=</span> <span class='va'>x</span>,
+   alpha <span class='op'>=</span> <span class='va'>alpha</span>,
+   theta <span class='op'>=</span> <span class='va'>theta</span>,
+   lambda <span class='op'>=</span> <span class='va'>lambda</span>,
+   beta <span class='op'>=</span> <span class='va'>beta</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.2430813</div><div class='input'><span class='fu'><a href='pdf_theorical.html'>pdf_theorical</a></span><span class='op'>(</span>
+   x <span class='op'>=</span> <span class='va'>x</span>,
+   alpha <span class='op'>=</span> <span class='va'>alpha</span>,
+   theta <span class='op'>=</span> <span class='va'>theta</span>,
+   beta <span class='op'>=</span> <span class='va'>beta</span>,
+   lambda <span class='op'>=</span> <span class='va'>lambda</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.2395632</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

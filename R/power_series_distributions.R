@@ -17,7 +17,7 @@ pf_ztp <- function(n, theta) {
 }
 
 #' Logarithmic probability function
-#'
+#' @importFrom actuar dlogarithmic
 #' @param n Function support, with \eqn{n = 1, 2, \cdots}.
 #' @param theta A probability value, i.e, \eqn{0 < \theta < 1}.
 #'
@@ -35,7 +35,7 @@ pf_logarithmic <- function(n, theta) {
 }
 
 #' Geometric probability function
-#'
+#' @importFrom stats dgeom
 #' @param n Function support, with \eqn{n = 1, 2, \cdots}.
 #' @param theta A probability value, i.e, \eqn{0 < \theta < 1}.
 #'

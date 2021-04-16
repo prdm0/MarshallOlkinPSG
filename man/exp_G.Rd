@@ -44,7 +44,7 @@ integrate(
 )
 
 # Exp-Weibull (accumulated distribution):
-cdf_exp_w <- exp_G(G = pdf_w, density = FALSE)
+cdf_exp_w <- exp_G(G = cdf_w, density = FALSE)
 
 # Testing whether it is cumulative distribution:
 cdf_exp_w(x = 0, alpha = 1.2, beta = 1.3, s = 2.1) # in 0

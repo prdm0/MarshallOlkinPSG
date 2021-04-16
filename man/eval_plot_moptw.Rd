@@ -6,29 +6,55 @@
 \usage{
 eval_plot_moptw(
   n_points = 5L,
-  N = 50L,
-  K = 50L,
+  N = 200L,
+  K = 100L,
   xmin,
   xmax,
   alpha,
   theta,
   beta,
-  lambda
+  lambda,
+  parallel = FALSE
 )
+}
+\arguments{
+\item{n_points}{Number of points to form the plot;}
+
+\item{N}{Maximum number of sums of the external sum of Eq. 19 of the paper.}
+
+\item{K}{Maximum number of sums of the interior sum of Eq. 19 of the paper.}
+
+\item{xmin}{Minimum value for the domain. This parameter allows you to control the x axis}
+
+\item{xmax}{Maximum value for the domain. This parameter allows you to control the x axis}
+
+\item{alpha}{Parameter added by the proposed family.}
+
+\item{theta}{Parameter added by the proposed family.}
+
+\item{beta}{Scale parameter of the Weibull distribution.}
+
+\item{lambda}{Shape parameter of the Weibull distribution.}
+
+\item{parallel}{If \code{parallel = TRUE}, the code will be executed in parallel, taking advantage of the predecessors multicolors, if any. If \code{parallel = FALSE}, the code will be executed serially.}
+}
+\value{
+Line graph comparing the theoretical distribution of Eq. 9 of the paper
+with an approximation, considering finite sums, by Eq. 19 of the paper.
 }
 \description{
 Plot Eval MOPTW
 }
 \examples{
 eval_plot_moptw(
-   n_points = 5L,
-   N = 100L,
+   n_points = 2L,
+   N = 200L,
    K = 100L,
    xmin = 0.01,
    xmax = 2,
-   alpha = 0.5,
-   theta = 0.5,
-   beta = 0.5,
-   lambda = 0.5
+   alpha = 1.2,
+   theta = 1.5,
+   beta = 1.33,
+   lambda = 2
 )
 }

@@ -14,6 +14,8 @@ upsilon(n, k, alpha, theta, p_n)
 \item{alpha}{Additional parameters introduced by the new model proposed in the paper.}
 
 \item{theta}{Additional parameters introduced by the new model proposed in the paper.}
+
+\item{p_n}{Zero-truncated power series distribution.}
 }
 \value{
 Return of expression  \eqn{\upsilon_{n,k}(\alpha, \beta)} ot the paper.

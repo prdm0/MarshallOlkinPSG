@@ -1,50 +1,35 @@
-# # Theoretical density (eq. 9 of the paper):
-# pdf_motpw <- function(x, alpha, theta, beta, lambda) {
-#   u <- (lambda * x)^beta
-#
-#   part_1 <- (alpha * theta * beta * lambda^beta * x^(beta - 1) * exp(-u)) /
-#     ((exp(theta) - 1) * (1 - (1 - alpha) * exp(-u))^2)
-#
-#   part_2 <- exp(theta * (1 - exp(-u)) / (1 - (1 - alpha) * exp(-u)))
-#
-#   part_1 * part_2
-# }
-#
-# pdf_motpw(x = 0.1, alpha = 0.5, theta = 0.5, beta = 0.5, lambda = 0.5)
-#
-# cdf_w <- function(x, beta, lambda) {
-#   pweibull(q = x, shape = beta, scale = lambda)
-# }
-#
-# pdf_motpw_aprox <- function(x) {
-#   eq_19(
-#     x = x,
-#     G = cdf_w,
-#     p_n = pf_ztp,
-#     N = 200L,
-#     K = 200L,
-#     alpha = 1.5,
-#     theta = 1.5,
-#     beta = 1.5,
-#     lambda = 1.5
-#   )
-# }
-
 #' Plot Eval MOPTW
+#' @importFrom ggplot2 ggplot geom_line
+#' @param n_points Number of points to form the plot;
+#' @param N Maximum number of sums of the external sum of Eq. 19 of the paper.
+#' @param K Maximum number of sums of the interior sum of Eq. 19 of the paper.
+#' @param xmin Minimum value for the domain. This parameter allows you to control the x axis
+#' @param xmax Maximum value for the domain. This parameter allows you to control the x axis
+#' @param parallel If `parallel = TRUE`, the code will be executed in parallel, taking advantage of the predecessors multicolors, if any. If `parallel = FALSE`, the code will be executed serially.
+#' @param alpha Parameter added by the proposed family.
+#' @param theta Parameter added by the proposed family.
+#' @param beta Scale parameter of the Weibull distribution.
+#' @param lambda Shape parameter of the Weibull distribution.
+#'
+#' @return Line graph comparing the theoretical distribution of Eq. 9 of the paper
+#' with an approximation, considering finite sums, by Eq. 19 of the paper.
+#'
 #' @export
+#'
 #' @examples
 #' eval_plot_moptw(
-#'    n_points = 5L,
-#'    N = 100L,
+#'    n_points = 2L,
+#'    N = 200L,
 #'    K = 100L,
 #'    xmin = 0.01,
 #'    xmax = 2,
-#'    alpha = 0.5,
-#'    theta = 0.5,
-#'    beta = 0.5,
-#'    lambda = 0.5
+#'    alpha = 1.2,
+#'    theta = 1.5,
+#'    beta = 1.33,
+#'    lambda = 2
 #' )
-eval_plot_moptw <- function(n_points = 5L, N = 50L, K = 50L, xmin, xmax, alpha, theta, beta, lambda) {
+eval_plot_moptw <- function(n_points = 5L, N = 200L, K = 100L, xmin, xmax, alpha,
+                            theta, beta, lambda, parallel = FALSE) {
   seq_x <- seq(xmin, xmax, length.out = n_points)
 
   cdf_w <- function(x, beta, lambda) {
@@ -67,8 +52,8 @@ eval_plot_moptw <- function(n_points = 5L, N = 50L, K = 50L, xmin, xmax, alpha, 
        x = seq_x,
        alpha = alpha,
        theta = theta,
-       beta = beta,
-       lambda = lambda
+       lambda = lambda,
+       beta = beta
     )
 
   y_aprox_step <- function(x) {
@@ -80,8 +65,9 @@ eval_plot_moptw <- function(n_points = 5L, N = 50L, K = 50L, xmin, xmax, alpha, 
        K = K,
        alpha = alpha,
        theta = theta,
+       lambda = lambda,
        beta = beta,
-       lambda = lambda
+       parallel = parallel
     )
   }
 

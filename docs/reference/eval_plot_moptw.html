@@ -127,31 +127,80 @@
 
     <pre class="usage"><span class='fu'>eval_plot_moptw</span><span class='op'>(</span>
   n_points <span class='op'>=</span> <span class='fl'>5L</span>,
-  N <span class='op'>=</span> <span class='fl'>50L</span>,
-  K <span class='op'>=</span> <span class='fl'>50L</span>,
+  N <span class='op'>=</span> <span class='fl'>200L</span>,
+  K <span class='op'>=</span> <span class='fl'>100L</span>,
   <span class='va'>xmin</span>,
   <span class='va'>xmax</span>,
   <span class='va'>alpha</span>,
   <span class='va'>theta</span>,
   <span class='va'>beta</span>,
-  <span class='va'>lambda</span>
+  <span class='va'>lambda</span>,
+  parallel <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>n_points</th>
+      <td><p>Number of points to form the plot;</p></td>
+    </tr>
+    <tr>
+      <th>N</th>
+      <td><p>Maximum number of sums of the external sum of Eq. 19 of the paper.</p></td>
+    </tr>
+    <tr>
+      <th>K</th>
+      <td><p>Maximum number of sums of the interior sum of Eq. 19 of the paper.</p></td>
+    </tr>
+    <tr>
+      <th>xmin</th>
+      <td><p>Minimum value for the domain. This parameter allows you to control the x axis</p></td>
+    </tr>
+    <tr>
+      <th>xmax</th>
+      <td><p>Maximum value for the domain. This parameter allows you to control the x axis</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>Parameter added by the proposed family.</p></td>
+    </tr>
+    <tr>
+      <th>theta</th>
+      <td><p>Parameter added by the proposed family.</p></td>
+    </tr>
+    <tr>
+      <th>beta</th>
+      <td><p>Scale parameter of the Weibull distribution.</p></td>
+    </tr>
+    <tr>
+      <th>lambda</th>
+      <td><p>Shape parameter of the Weibull distribution.</p></td>
+    </tr>
+    <tr>
+      <th>parallel</th>
+      <td><p>If <code>parallel = TRUE</code>, the code will be executed in parallel, taking advantage of the predecessors multicolors, if any. If <code>parallel = FALSE</code>, the code will be executed serially.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Line graph comparing the theoretical distribution of Eq. 9 of the paper
+with an approximation, considering finite sums, by Eq. 19 of the paper.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>eval_plot_moptw</span><span class='op'>(</span>
-   n_points <span class='op'>=</span> <span class='fl'>5L</span>,
-   N <span class='op'>=</span> <span class='fl'>100L</span>,
+   n_points <span class='op'>=</span> <span class='fl'>2L</span>,
+   N <span class='op'>=</span> <span class='fl'>200L</span>,
    K <span class='op'>=</span> <span class='fl'>100L</span>,
    xmin <span class='op'>=</span> <span class='fl'>0.01</span>,
    xmax <span class='op'>=</span> <span class='fl'>2</span>,
-   alpha <span class='op'>=</span> <span class='fl'>0.5</span>,
-   theta <span class='op'>=</span> <span class='fl'>0.5</span>,
-   beta <span class='op'>=</span> <span class='fl'>0.5</span>,
-   lambda <span class='op'>=</span> <span class='fl'>0.5</span>
+   alpha <span class='op'>=</span> <span class='fl'>1.2</span>,
+   theta <span class='op'>=</span> <span class='fl'>1.5</span>,
+   beta <span class='op'>=</span> <span class='fl'>1.33</span>,
+   lambda <span class='op'>=</span> <span class='fl'>2</span>
 <span class='op'>)</span>
-</div><div class='img'><img src='eval_plot_moptw-1.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in pdf_motpw(x = seq_x, alpha = alpha, theta = theta, lambda = lambda,     beta = beta, ): unused argument (alist())</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
