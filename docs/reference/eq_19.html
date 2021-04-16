@@ -130,21 +130,22 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Theoretical density (eq. 9 of the paper):</span>
-<span class='va'>pdf_motpw</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>alpha</span>, <span class='va'>theta</span>, <span class='va'>beta</span>, <span class='va'>lambda</span><span class='op'>)</span> <span class='op'>{</span>
-   <span class='va'>u</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>lambda</span> <span class='op'>*</span> <span class='va'>x</span><span class='op'>)</span><span class='op'>^</span><span class='va'>beta</span>
+    <pre class="examples"><div class='input'>
+<span class='co'># Theoretical density (eq. 9 of the paper):</span>
+<span class='va'>pdf_theorical</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>alpha</span>, <span class='va'>theta</span>, <span class='va'>beta</span>, <span class='va'>lambda</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>u</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>lambda</span> <span class='op'>*</span> <span class='va'>x</span><span class='op'>)</span><span class='op'>^</span><span class='va'>beta</span>
 
-   <span class='va'>part_1</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>alpha</span> <span class='op'>*</span> <span class='va'>theta</span> <span class='op'>*</span> <span class='va'>beta</span> <span class='op'>*</span> <span class='va'>lambda</span><span class='op'>^</span><span class='va'>beta</span> <span class='op'>*</span> <span class='va'>x</span><span class='op'>^</span><span class='op'>(</span><span class='va'>beta</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>/</span>
-   <span class='op'>(</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='va'>theta</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>*</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='va'>alpha</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span>
+  <span class='va'>part_1</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>alpha</span> <span class='op'>*</span> <span class='va'>theta</span> <span class='op'>*</span> <span class='va'>beta</span> <span class='op'>*</span> <span class='va'>lambda</span><span class='op'>^</span><span class='va'>beta</span> <span class='op'>*</span> <span class='va'>x</span><span class='op'>^</span><span class='op'>(</span><span class='va'>beta</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>/</span>
+    <span class='op'>(</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='va'>theta</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>*</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='va'>alpha</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span>
 
-   <span class='va'>part_2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='va'>theta</span> <span class='op'>*</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>/</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='va'>alpha</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>part_2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='va'>theta</span> <span class='op'>*</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>/</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='va'>alpha</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>u</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 
-   <span class='va'>part_1</span> <span class='op'>*</span> <span class='va'>part_2</span>
+  <span class='va'>part_1</span> <span class='op'>*</span> <span class='va'>part_2</span>
 <span class='op'>}</span>
 
-<span class='co'># Arriving the value of the integral:</span>
+<span class='co'># Checking the implementation of the pdf_theorical function</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/integrate.html'>integrate</a></span><span class='op'>(</span>
-  <span class='va'>pdf_motpw</span>,
+  <span class='va'>pdf_theorical</span>,
   lower <span class='op'>=</span> <span class='fl'>0</span>,
   upper <span class='op'>=</span> <span class='fl'>20</span>,
   alpha <span class='op'>=</span> <span class='fl'>1</span>,
@@ -153,28 +154,39 @@
   lambda <span class='op'>=</span> <span class='fl'>1</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; 1 with absolute error &lt; 1.7e-07</div><div class='input'>
-<span class='co'>##########################</span>
-
+<span class='co'># Implementing the Weibull distribution function (baseline). This function is</span>
+<span class='co'># used in the eq_19 function. Another baseline G can be passed and tested in</span>
+<span class='co'># eq_19.</span>
 <span class='va'>cdf_w</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>beta</span>, <span class='va'>lambda</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/Weibull.html'>pweibull</a></span><span class='op'>(</span>q <span class='op'>=</span> <span class='va'>x</span>, shape <span class='op'>=</span> <span class='va'>beta</span>, scale <span class='op'>=</span> <span class='va'>lambda</span><span class='op'>)</span>
 <span class='op'>}</span>
 
-<span class='va'>f</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
-   <span class='fu'>eq_19</span><span class='op'>(</span>
-      x <span class='op'>=</span> <span class='va'>x</span>,
-      G <span class='op'>=</span> <span class='va'>cdf_w</span>,
-      p_n <span class='op'>=</span> <span class='va'>pf_ztp</span>,
-      N <span class='op'>=</span> <span class='fl'>200L</span>,
-      K <span class='op'>=</span> <span class='fl'>100L</span>,
-      alpha <span class='op'>=</span> <span class='fl'>1.2</span>,
-      theta <span class='op'>=</span> <span class='fl'>0.3</span>,
-      beta <span class='op'>=</span> <span class='fl'>1</span>,
-      lambda <span class='op'>=</span> <span class='fl'>1</span>
-    <span class='op'>)</span>
+<span class='va'>pdf_aprox</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>alpha</span>, <span class='va'>theta</span>, <span class='va'>lambda</span>, <span class='va'>beta</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>eq_19</span><span class='op'>(</span>
+    x <span class='op'>=</span> <span class='va'>x</span>,
+    G <span class='op'>=</span> <span class='va'>cdf_w</span>,
+    p_n <span class='op'>=</span> <span class='va'>pf_ztp</span>,
+    N <span class='op'>=</span> <span class='fl'>200L</span>,
+    K <span class='op'>=</span> <span class='fl'>100L</span>,
+    alpha <span class='op'>=</span> <span class='va'>alpha</span>,
+    theta <span class='op'>=</span> <span class='va'>theta</span>,
+    beta <span class='op'>=</span> <span class='va'>beta</span>,
+    lambda <span class='op'>=</span> <span class='va'>lambda</span>
+  <span class='op'>)</span>
 <span class='op'>}</span>
 
-<span class='fu'>f</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0.5514836</div></pre>
+<span class='co'># True parameters:</span>
+<span class='va'>x</span> <span class='op'>=</span> <span class='fl'>0.28</span>
+<span class='va'>alpha</span> <span class='op'>=</span> <span class='fl'>1</span>
+<span class='va'>theta</span> <span class='op'>=</span> <span class='fl'>1</span>
+<span class='va'>beta</span> <span class='op'>=</span> <span class='fl'>1</span>
+<span class='va'>lambda</span> <span class='op'>=</span> <span class='fl'>1</span>
+
+<span class='co'># Checking theoretical density and approximate density, for a finite sum of</span>
+<span class='co'># Eq. 19 of the paper:</span>
+<span class='fu'>pdf_aprox</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, alpha <span class='op'>=</span> <span class='va'>alpha</span>, theta <span class='op'>=</span> <span class='va'>theta</span>, lambda <span class='op'>=</span> <span class='va'>lambda</span>, beta <span class='op'>=</span> <span class='va'>beta</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.5615196</div><div class='input'><span class='fu'>pdf_theorical</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='va'>alpha</span>, theta <span class='op'>=</span> <span class='va'>theta</span>, beta <span class='op'>=</span> <span class='va'>beta</span>, lambda <span class='op'>=</span> <span class='va'>lambda</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.5615196</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • MarshallOlkinPSG</title>
+<title>Plot Eval MOPTW — eval_plot_moptw • MarshallOlkinPSG</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Plot Eval MOPTW — eval_plot_moptw" />
+<meta property="og:description" content="Plot Eval MOPTW" />
 <meta property="og:image" content="https://purrr.tidyverse.org/logo.png" />
 
 
@@ -66,7 +67,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -113,78 +114,45 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Plot Eval MOPTW</h1>
+    <small class="dont-index">Source: <a href='https://github.com/prdm0/MarshallOlkinPSG/blob/master/R/eval-plot.R'><code>R/eval-plot.R</code></a></small>
+    <div class="hidden name"><code>eval_plot_moptw.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Plot Eval MOPTW</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>eval_plot_moptw</span><span class='op'>(</span>
+  n_points <span class='op'>=</span> <span class='fl'>5L</span>,
+  N <span class='op'>=</span> <span class='fl'>50L</span>,
+  K <span class='op'>=</span> <span class='fl'>50L</span>,
+  <span class='va'>xmin</span>,
+  <span class='va'>xmax</span>,
+  <span class='va'>alpha</span>,
+  <span class='va'>theta</span>,
+  <span class='va'>beta</span>,
+  <span class='va'>lambda</span>
+<span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="eq_19.html">eq_19()</a></code> </p>
-        </td>
-        <td><p>Equation 19 of the paper</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="eval_plot_moptw.html">eval_plot_moptw()</a></code> </p>
-        </td>
-        <td><p>Plot Eval MOPTW</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="exp_G.html">exp_G()</a></code> </p>
-        </td>
-        <td><p>Generates the density distribution or the accumulated distribution function Exp-G</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pf_geometric.html">pf_geometric()</a></code> </p>
-        </td>
-        <td><p>Geometric probability function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pf_logarithmic.html">pf_logarithmic()</a></code> </p>
-        </td>
-        <td><p>Logarithmic probability function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pf_ztp.html">pf_ztp()</a></code> </p>
-        </td>
-        <td><p>Zero-truncated Poisson probability function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="upsilon.html">upsilon()</a></code> </p>
-        </td>
-        <td><p>Mathematical term used in the sum of equation 19 of the paper</p></td>
-      </tr>
-    </tbody>
-    </table>
+
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>eval_plot_moptw</span><span class='op'>(</span>
+   n_points <span class='op'>=</span> <span class='fl'>5L</span>,
+   N <span class='op'>=</span> <span class='fl'>100L</span>,
+   K <span class='op'>=</span> <span class='fl'>100L</span>,
+   xmin <span class='op'>=</span> <span class='fl'>0.01</span>,
+   xmax <span class='op'>=</span> <span class='fl'>2</span>,
+   alpha <span class='op'>=</span> <span class='fl'>0.5</span>,
+   theta <span class='op'>=</span> <span class='fl'>0.5</span>,
+   beta <span class='op'>=</span> <span class='fl'>0.5</span>,
+   lambda <span class='op'>=</span> <span class='fl'>0.5</span>
+<span class='op'>)</span>
+</div><div class='img'><img src='eval_plot_moptw-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
