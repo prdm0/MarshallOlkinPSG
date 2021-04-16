@@ -66,21 +66,22 @@ upsilon <- function(n, k, alpha, theta, p_n) {
 #' Equation 19 of the paper
 #'
 #' @examples
+#'
 #' # Theoretical density (eq. 9 of the paper):
-#' pdf_motpw <- function(x, alpha, theta, beta, lambda) {
-#'    u <- (lambda * x)^beta
+#' pdf_theorical <- function(x, alpha, theta, beta, lambda) {
+#'   u <- (lambda * x)^beta
 #'
-#'    part_1 <- (alpha * theta * beta * lambda^beta * x^(beta - 1) * exp(-u)) /
-#'    ((exp(theta) - 1) * (1 - (1 - alpha) * exp(-u))^2)
+#'   part_1 <- (alpha * theta * beta * lambda^beta * x^(beta - 1) * exp(-u)) /
+#'     ((exp(theta) - 1) * (1 - (1 - alpha) * exp(-u))^2)
 #'
-#'    part_2 <- exp(theta * (1 - exp(-u)) / (1 - (1 - alpha) * exp(-u)))
+#'   part_2 <- exp(theta * (1 - exp(-u)) / (1 - (1 - alpha) * exp(-u)))
 #'
-#'    part_1 * part_2
+#'   part_1 * part_2
 #' }
 #'
-#' # Arriving the value of the integral:
+#' # Checking the implementation of the pdf_theorical function
 #' integrate(
-#'   pdf_motpw,
+#'   pdf_theorical,
 #'   lower = 0,
 #'   upper = 20,
 #'   alpha = 1,
@@ -89,27 +90,38 @@ upsilon <- function(n, k, alpha, theta, p_n) {
 #'   lambda = 1
 #' )
 #'
-#' ##########################
-#'
+#' # Implementing the Weibull distribution function (baseline). This function is
+#' # used in the eq_19 function. Another baseline G can be passed and tested in
+#' # eq_19.
 #' cdf_w <- function(x, beta, lambda) {
 #'   pweibull(q = x, shape = beta, scale = lambda)
 #' }
 #'
-#' f <- function(x) {
-#'    eq_19(
-#'       x = x,
-#'       G = cdf_w,
-#'       p_n = pf_ztp,
-#'       N = 200L,
-#'       K = 100L,
-#'       alpha = 1.2,
-#'       theta = 0.3,
-#'       beta = 1,
-#'       lambda = 1
-#'     )
+#' pdf_aprox <- function(x, alpha, theta, lambda, beta) {
+#'   eq_19(
+#'     x = x,
+#'     G = cdf_w,
+#'     p_n = pf_ztp,
+#'     N = 200L,
+#'     K = 100L,
+#'     alpha = alpha,
+#'     theta = theta,
+#'     beta = beta,
+#'     lambda = lambda
+#'   )
 #' }
 #'
-#' f(x = 0.5)
+#' # True parameters:
+#' x = 0.28
+#' alpha = 1
+#' theta = 1
+#' beta = 1
+#' lambda = 1
+#'
+#' # Checking theoretical density and approximate density, for a finite sum of
+#' # Eq. 19 of the paper:
+#' pdf_aprox(x = x, alpha = alpha, theta = theta, lambda = lambda, beta = beta)
+#' pdf_theorical(x, alpha = alpha, theta = theta, beta = beta, lambda = lambda)
 #' @export
 eq_19 <- function(x, G, p_n, N = 50L, K = 50L, alpha, theta, ...) {
 
