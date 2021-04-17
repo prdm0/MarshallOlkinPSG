@@ -1,5 +1,6 @@
 #' Plot Eval MOPTW
-#' @importFrom ggplot2 ggplot geom_line aes
+#' @importFrom ggplot2 ggplot geom_line aes ggtitle ylab theme labs element_text
+#' @importFrom glue glue
 #' @param n_points Number of points to form the plot;
 #' @param N Maximum number of sums of the external sum of Eq. 19 of the paper.
 #' @param K Maximum number of sums of the interior sum of Eq. 19 of the paper.
@@ -18,9 +19,9 @@
 #'
 #' @examples
 #' eval_plot_moptw(
-#'    n_points = 2L,
-#'    N = 200L,
-#'    K = 100L,
+#'    n_points = 200L,
+#'    N = 3L,
+#'    K = 3L,
 #'    xmin = 0.01,
 #'    xmax = 2,
 #'    alpha = 1.2,
@@ -75,12 +76,16 @@ eval_plot_moptw <- function(n_points = 5L, N = 200L, K = 100L, xmin, xmax, alpha
   y_aprox <- vapply(X = seq_x, FUN = y_aprox_step, FUN.VALUE = double(length = 1L))
 
   df <- data.frame(x = rep(seq_x, 2L), y = c(y_theorical, y_aprox),
-        name = c(rep("theorical", length(y_aprox)), rep("aprox", length(y_theorical))))
+        name = c(rep("Exact Distribution", length(y_aprox)), rep("Approximate Distribution", length(y_theorical))))
 
   df %>%
-     ggplot(aes(x = x, y = y, color = name)) +
-     geom_line()
-
-  df
-
+     ggplot2::ggplot(ggplot2::aes(x = x, y = y, color = name)) +
+     ggplot2::geom_line(size = 1.5) +
+    ggtitle("Numerical Evaluation", subtitle = glue::glue("Comparing Eq. 9 with Eq. 19 for N = {N} and K = {K}")) +
+    labs(color = "") +
+    ylab("f(x)") +
+    theme(
+      legend.position="bottom",
+      title = element_text(face = "bold")
+    )
 }

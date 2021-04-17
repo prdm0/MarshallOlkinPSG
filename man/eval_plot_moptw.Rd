@@ -47,9 +47,9 @@ Plot Eval MOPTW
 }
 \examples{
 eval_plot_moptw(
-   n_points = 2L,
-   N = 200L,
-   K = 100L,
+   n_points = 200L,
+   N = 3L,
+   K = 3L,
    xmin = 0.01,
    xmax = 2,
    alpha = 1.2,
