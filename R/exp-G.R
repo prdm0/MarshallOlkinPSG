@@ -116,7 +116,7 @@ pdf_theorical <- function(x, alpha, theta, beta, lambda) {
 #' # used in the eq_19 function. Another baseline G can be passed and tested in
 #' # eq_19.
 #' cdf_w <- function(x, beta, lambda) {
-#'   pweibull(q = x, shape = beta, scale = lambda)
+#'    1 - exp(-(lambda * x)^beta)
 #' }
 #'
 #' pdf_aprox <- function(x, alpha, theta, lambda, beta) {
