@@ -17,7 +17,6 @@ pf_ztp <- function(n, theta) {
 }
 
 #' Logarithmic probability function
-#' @importFrom actuar dlogarithmic
 #' @param n Function support, with \eqn{n = 1, 2, \cdots}.
 #' @param theta A probability value, i.e, \eqn{0 < \theta < 1}.
 #'
@@ -44,7 +43,6 @@ pf_logarithmic <- function(n, theta) {
 }
 
 #' Geometric probability function
-#' @importFrom actuar dztgeom
 #' @param n Function support, with \eqn{n = 1, 2, \cdots}.
 #' @param theta A probability value, i.e, \eqn{0 < \theta < 1}.
 #'
@@ -58,5 +56,5 @@ pf_logarithmic <- function(n, theta) {
 #'    pf_geometric(n = i, theta = 0.5)
 #' ) %>% sum
 pf_geometric <- function(n, theta) {
-  dztgeom(x = n, prob = theta, log = FALSE)
+   theta * (1 - theta)^(n - 1)
 }
