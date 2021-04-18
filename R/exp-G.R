@@ -98,7 +98,6 @@ pdf_theorical <- function(x, alpha, theta, beta, lambda) {
 #' Equation 19 of the paper
 #' @importFrom future plan
 #' @importFrom furrr future_map_dbl
-#' @importFrom stats pweibull
 #' @param x Support of the probability density function.
 #' @param G Baseline cumulative distribution function.
 #' @param p_n Zero-truncated power series distribution.
@@ -177,11 +176,12 @@ eq_19 <- function(x, G, p_n, N = 50L, K = 50L, alpha, theta, parallel = FALSE, .
       FUN.VALUE = double(length = 1L)
       ) %>% sum()
   }
-
   if(parallel){
-    future::plan("multisession", workers = parallel::detectCores() - 1L)
+    future::plan("multisession")
     furrr::future_map_dbl(.x = 1L:N, .f = inner_sum) %>%
-      sum()
+       sum()
+
+    future::plan("sequential")
   } else {
     vapply(
        X = 1L:N,
