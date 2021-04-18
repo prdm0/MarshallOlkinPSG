@@ -23,8 +23,8 @@
 #'    f = pdf_exp_w,
 #'    lower = 0,
 #'    upper = Inf,
-#'    alpha = 1.2,
-#'    beta = 1.3,
+#'    beta = 1.2,
+#'    lambda = 1.3,
 #'    s = 2.1
 #' )
 #'
@@ -32,8 +32,8 @@
 #' cdf_exp_w <- exp_G(G = cdf_w, density = FALSE)
 #'
 #' # Testing whether it is cumulative distribution:
-#' cdf_exp_w(x = 0, alpha = 1.2, beta = 1.3, s = 2.1) # in 0
-#' cdf_exp_w(x = Inf, alpha = 1.2, beta = 1.3, s = 2.1) # in Inf
+#' cdf_exp_w(x = 0, beta = 1.2, lambda = 1.3, s = 2.1) # in 0
+#' cdf_exp_w(x = Inf, beta = 1.2, lambda = 1.3, s = 2.1) # in Inf
 exp_G <- function(G, density = FALSE) {
 
   if(density){

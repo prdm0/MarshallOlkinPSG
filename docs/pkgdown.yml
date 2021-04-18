@@ -1,8 +1,8 @@
-pandoc: 2.11.4
+pandoc: '2.13'
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2021-04-17T00:43Z
+last_built: 2021-04-18T12:04Z
 urls:
   reference: https://purrr.tidyverse.org/reference
   article: https://purrr.tidyverse.org/articles

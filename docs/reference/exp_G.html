@@ -165,18 +165,18 @@ Exp-G will have one more parameter, being it \(s &gt; 0\).</p>
    f <span class='op'>=</span> <span class='va'>pdf_exp_w</span>,
    lower <span class='op'>=</span> <span class='fl'>0</span>,
    upper <span class='op'>=</span> <span class='cn'>Inf</span>,
-   alpha <span class='op'>=</span> <span class='fl'>1.2</span>,
-   beta <span class='op'>=</span> <span class='fl'>1.3</span>,
+   beta <span class='op'>=</span> <span class='fl'>1.2</span>,
+   lambda <span class='op'>=</span> <span class='fl'>1.3</span>,
    s <span class='op'>=</span> <span class='fl'>2.1</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in G(x, ...): unused argument (alpha = 1.2)</span></div><div class='input'>
+</div><div class='output co'>#&gt; 1 with absolute error &lt; 2.2e-05</div><div class='input'>
 <span class='co'># Exp-Weibull (accumulated distribution):</span>
 <span class='va'>cdf_exp_w</span> <span class='op'>&lt;-</span> <span class='fu'>exp_G</span><span class='op'>(</span>G <span class='op'>=</span> <span class='va'>cdf_w</span>, density <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='co'># Testing whether it is cumulative distribution:</span>
-<span class='fu'>cdf_exp_w</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>0</span>, alpha <span class='op'>=</span> <span class='fl'>1.2</span>, beta <span class='op'>=</span> <span class='fl'>1.3</span>, s <span class='op'>=</span> <span class='fl'>2.1</span><span class='op'>)</span> <span class='co'># in 0</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in G(x = x, ...): unused argument (alpha = 1.2)</span></div><div class='input'><span class='fu'>cdf_exp_w</span><span class='op'>(</span>x <span class='op'>=</span> <span class='cn'>Inf</span>, alpha <span class='op'>=</span> <span class='fl'>1.2</span>, beta <span class='op'>=</span> <span class='fl'>1.3</span>, s <span class='op'>=</span> <span class='fl'>2.1</span><span class='op'>)</span> <span class='co'># in Inf</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in G(x = x, ...): unused argument (alpha = 1.2)</span></div></pre>
+<span class='fu'>cdf_exp_w</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>0</span>, beta <span class='op'>=</span> <span class='fl'>1.2</span>, lambda <span class='op'>=</span> <span class='fl'>1.3</span>, s <span class='op'>=</span> <span class='fl'>2.1</span><span class='op'>)</span> <span class='co'># in 0</span>
+</div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='fu'>cdf_exp_w</span><span class='op'>(</span>x <span class='op'>=</span> <span class='cn'>Inf</span>, beta <span class='op'>=</span> <span class='fl'>1.2</span>, lambda <span class='op'>=</span> <span class='fl'>1.3</span>, s <span class='op'>=</span> <span class='fl'>2.1</span><span class='op'>)</span> <span class='co'># in Inf</span>
+</div><div class='output co'>#&gt; [1] 1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
