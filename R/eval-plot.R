@@ -81,7 +81,7 @@ eval_plot_moptw <- function(n_points = 5L, N = 200L, K = 100L, xmin, xmax, alpha
   df %>%
      ggplot2::ggplot(ggplot2::aes(x = x, y = y, color = name)) +
      ggplot2::geom_line(size = 1.5) +
-    ggtitle("Numerical Evaluation", subtitle = glue::glue("Comparing Eq. 9 with Eq. 19 for N = {N} and K = {K}")) +
+    ggtitle("", subtitle = glue::glue("Comparing Eq. (9) with Eq. (19) for N = {N} and K = {K}")) +
     labs(color = "") +
     ylab("f(x)") +
     theme(

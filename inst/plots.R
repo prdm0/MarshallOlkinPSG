@@ -53,4 +53,4 @@ p4 <- eval_plot_moptw(
 )
 
 plot_grid(p1, p2, p3, p4, labels = LETTERS[1L:4L], label_size = 12)
-  ggsave("~/Downloads/MarshallOlkinPSG/inst/numerical_evaluation.png", width = 8, height = 8)
+  ggsave("~/Downloads/MarshallOlkinPSG/inst/numerical_evaluation.png", width = 8.4, height = 8.4)
